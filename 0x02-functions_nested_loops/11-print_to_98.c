@@ -1,52 +1,31 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
-* print_times_table - prints the n times table, starting with 0
-* @n: integer to specify the size of the times table
-*
-* Return: void
+* print_to_98 - Prints all natural numbers from n to 98
+* @n: The starting number
 */
-void print_times_table(int n)
+void print_to_98(int n)
 {
-int i, j, result;
+int i;
 
-if (n < 0 || n > 15)
-return;
-
-for (i = 0; i <= n; i++)
+if (n <= 98)
 {
-for (j = 0; j <= n; j++)
+for (i = n; i <= 98; i++)
 {
-result = i * j;
-
-if (j == 0)
-_putchar('0' + result);
-else if (result < 10)
-{
-_putchar(',');
-_putchar(' ');
-_putchar(' ');
-_putchar(' ');
-_putchar('0' + result);
+printf("%d", i);
+if (i != 98)
+printf(", ");
 }
-else if (result < 100)
-{
-_putchar(',');
-_putchar(' ');
-_putchar(' ');
-_putchar('0' + result / 10);
-_putchar('0' + result % 10);
 }
 else
 {
-_putchar(',');
-_putchar(' ');
-_putchar('0' + result / 100);
-_putchar('0' + (result / 10) % 10);
-_putchar('0' + result % 10);
+for (i = n; i >= 98; i--)
+{
+printf("%d", i);
+if (i != 98)
+printf(", ");
 }
 }
-
-_putchar('\n');
-}
+printf("\n");
 }
