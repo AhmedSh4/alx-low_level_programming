@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include "main.h"
+
 /**
-* This function, print_remaining_days,
-* calculates and prints the number of days
-* remaining in a given year, taking into account leap years.
-* @month: the month in numerical format
-* @day: the day of the month
-* @year: the year
-* This function does not return a value, instead,
-*-it prints the result directly.
+* print_remaining_days - takes a date and prints how many days are
+* left in the year, taking leap years into account
+* prints the date
+* @month: month in number format
+* @day: day of month
+* @year: year
+* Return: void
 */
+
 void print_remaining_days(int month, int day, int year)
 {
-if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+if ((year % 100 == 0 && year % 400 == 0) || (year % 4 == 0))
 {
-if (month >= 3 && day >= 60)
+if (month > 2 && day >= 60)
 {
 day++;
 }
