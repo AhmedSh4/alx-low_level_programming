@@ -1,15 +1,17 @@
+#include <stdio.h>
+
 #include "main.h"
 #include <stdio.h>
 
 /**
- * main - Entry point
- *
- * Description: Prints numbers 1 to 100 but with
- * Fizz instead of multiples of 3 and Buzz instead
- * of multiples of 5. For multiples of both 3 and
- * 5, FizzBuzz is printed.
- * Return: Always 0 (Success)
- */
+* main - Entry point
+*
+* Description: Prints numbers 1 to 100 but with
+* Fizz instead of multiples of 3 and Buzz instead
+* of multiples of 5. For multiples of both 3 and
+* 5, FizzBuzz is printed.
+* Return: Always 0 (Success)
+*/
 int main(void)
 {
 int i;
@@ -28,6 +30,5 @@ printf("%d ", i);
 
 printf("\n");
 
-return 0;
+return (0);
 }
-
