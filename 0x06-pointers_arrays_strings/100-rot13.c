@@ -1,34 +1,30 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 /**
-* rot13 - encode a string using the rot13 algorithm
-* @s: pointer to the string to encode
+* rot13 - encoder rot13
+* @s: pointer to string params
 *
-* Return: pointer to the encoded string, or NULL if s is NULL
+* Return: *s
 */
+
 char *rot13(char *s)
 {
-if (s == NULL)
-return (NULL);
+int i;
+int j;
+char data1[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+char datarot[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-char *encoded = malloc(sizeof(char) * (strlen(s) + 1));
-if (encoded == NULL)
-return (NULL);
-
-const char *alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-const char *rot   = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-
-for (int i = 0; s[i] != '\0'; i++)
+for (i = 0; s[i] != '\0'; i++)
 {
-char *p = strchr(alpha, s[i]);
-if (p == NULL)
-encoded[i] = s[i];
-else
-encoded[i] = rot[p - alpha];
+for (j = 0; j < 52; j++)
+{
+if (s[i] == data1[j])
+{
+s[i] = datarot[j];
+break;
 }
-
-encoded[strlen(s)] = '\0';
-return (encoded);
+}
+}
+return (s);
 }
