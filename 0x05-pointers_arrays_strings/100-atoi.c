@@ -1,4 +1,5 @@
 #include "main.h"
+#include <limits.h>
 
 /**
 * _atoi - converts a string to an integer
@@ -18,8 +19,11 @@ else if (*s >= '0' && *s <= '9')
 {
 digit = *s - '0';
 num = num * 10 + digit;
+
+// Check for overflow
 if (num < prev_num || num > INT_MAX - digit)
 {
+// handle overflow
 if (sign == 1)
 return INT_MAX;
 else
