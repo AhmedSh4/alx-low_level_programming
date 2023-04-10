@@ -1,24 +1,27 @@
 #include "main.h"
 /**
-* leet - encode into 1337speak
+* _strncpy - copy a string
+* @dest: input value
+* @src: input value
 * @n: input value
-* Return: n value
+*
+* Return: dest
 */
-char *leet(char *n)
+char *_strncpy(char *dest, char *src, int n)
 {
-int i, j;
-char s1[] = "aAeEoOtTlL";
-char s2[] = "4433007711";
+int j;
 
-for (i = 0; n[i] != '\0'; i++)
+j = 0;
+while (j < n && src[j] != '\0')
 {
-for (j = 0; j < 10; j++)
+dest[j] = src[j];
+j++;
+}
+while (j < n)
 {
-if (n[i] == s1[j])
-{
-n[i] = s2[j];
+dest[j] = '\0';
+j++;
 }
-}
-}
-return (n);
+
+return (dest);
 }
