@@ -10,27 +10,21 @@
 */
 int _atoi(char *s)
 {
-int sign = 1, num = 0, prev_num = 0, digit;
+int sign = 1, i = 0;
+unsigned int res = 0;
 
-while (*s)
+while (!(s[i] <= '9' && s[i] >= '0') && s[i] != '\0')
 {
-if (*s == '-')
+if (s[i] == '-')
 sign *= -1;
-if (*s >= '0' && *s <= '9')
+i++;
+}
+while (s[i] <= '9' && (s[i] >= '0' && s[i] != '\0'))
 {
-digit = *s - '0';
-num = num * 10 + digit;
-if (num < prev_num || num > INT_MAX - digit)
-{
-if (sign == 1)
-return INT_MAX;
-return INT_MIN;
+res = (res * 10) + (s[i] - '0');
+i++;
 }
-prev_num = num;
+res *= sign;
+return (res);
 }
-if (*s == ';')
-break;
-s++;
-}
-return num * sign;
-}
+
