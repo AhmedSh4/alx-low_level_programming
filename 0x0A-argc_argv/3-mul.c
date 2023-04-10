@@ -2,13 +2,15 @@
 #include "main.h"
 
 /**
-*_atoi - converts a string to an integer
-*@s: string to be converted
-*Return: the integer converted from the string
+* _atoi - converts a string to an integer
+* @s: string to be converted
+*
+* Return: the int converted from the string
 */
-int _atoi(char s)
+int _atoi(char *s)
 {
 int i, d, n, len, f, digit;
+
 i = 0;
 d = 0;
 n = 0;
@@ -45,17 +47,17 @@ return (n);
 }
 
 /**
-*main - multiplies two numbers
-*@argc: number of arguments
-*@argv: array of arguments
-*Return: 0 (Success), 1 (Error)
+* main - multiplies two numbers
+* @argc: number of arguments
+* @argv: array of arguments
+*
+* Return: 0 (Success), 1 (Error)
 */
-
-int main(int argc, char argv[])
+int main(int argc, char **argv)
 {
 int result, num1, num2;
 
-if (argc < 3 || argc > 3)
+if (argc != 3)
 {
 printf("Error\n");
 return (1);
@@ -63,7 +65,7 @@ return (1);
 
 num1 = _atoi(argv[1]);
 num2 = _atoi(argv[2]);
-result = num1 *num2;
+result = num1 * num2;
 
 printf("%d\n", result);
 
