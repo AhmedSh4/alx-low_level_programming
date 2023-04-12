@@ -1,91 +1,87 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
 /**
-* count_words - Counts the number of words in a string.
-* @str: The string to count words in.
+* count_word - helper function to count the number of words in a string
+* @s: string to evaluate
 *
-* Return: The number of words in the string.
+* Return: number of words
 */
-int count_words(char *str)
+int count_word(char *s)
 {
-int i, count = 0;
+int flag, c, w;
 
-if (str == NULL)
-return (0);
+flag = 0;
+w = 0;
 
-for (i = 0; str[i] != '\0'; i++)
+for (c = 0; s[c] != '\0'; c++)
 {
-if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+if (s[c] == ' ')
+flag = 0;
+else if (flag == 0)
 {
-count++;
+flag = 1;
+w++;
 }
 }
 
-return (count);
+return (w);
 }
 
 /**
-* strtow - Splits a string into words.
-* @str: The string to split.
+* strtow - splits a string into words
+* @str: string to split
 *
-* Return: A pointer to an array of strings (words), or NULL if it fails.
+* Return: pointer to an array of strings (Success)
+* or NULL (Error)
 */
 char **strtow(char *str)
 {
-char **words;
-int i, j, k, len, count;
+char **wow, *tmp;
+int i, k = 0, len = 0, words, c = 0, start, end;
 
-if (str == NULL || str[0] == '\0')
-{
-return (NULL);
-}
-
-count = count_words(str);
-words = malloc(sizeof(char *) * (count + 1));
-
-if (words == NULL)
-{
-return (NULL);
-}
-
-for (i = 0, j = 0; j < count; i++)
-{
-if (str[i] != ' ')
-{
-len = 0;
-
-while (str[i + len] != ' ' && str[i + len] != '\0')
-{
+while (*(str + len))
 len++;
-}
 
-words[j] = malloc(sizeof(char) * (len + 1));
+words = count_word(str);
 
-if (words[j] == NULL)
-{
-for (k = 0; k < j; k++)
-{
-free(words[k]);
-}
-
-free(words);
+if (words == 0)
 return (NULL);
-}
 
-for (k = 0; k < len; k++)
+wow = (char **) malloc(sizeof(char *) * (words + 1));
+
+if (wow == NULL)
+return (NULL);
+
+for (i = 0; i <= len; i++)
 {
-words[j][k] = str[i + k];
+if (str[i] == ' ' || str[i] == '\0')
+{
+if (c)
+{
+end = i;
+
+tmp = (char *) malloc(sizeof(char) * (c + 1));
+
+if (tmp == NULL)
+return (NULL);
+
+while (start < end)
+*tmp++ = str[start++];
+
+*tmp = '\0';
+
+wow[k] = tmp - c;
+
+k++;
+c = 0;
+}
+}
+else if (c++ == 0)
+start = i;
 }
 
-words[j][len] = '\0';
-j++;
-i += len;
-}
-}
+wow[k] = NULL;
 
-words[count] = NULL;
-
-return (words);
+return (wow);
 }
