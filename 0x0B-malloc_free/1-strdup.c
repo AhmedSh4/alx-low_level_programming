@@ -1,18 +1,13 @@
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include "main.h"
 
 /**
-
 * _strdup - duplicate to new memory space location
-
 * @str: char
-
 * Return: 0
-
 */
+
 char *my_strdup(char *src)
 {
 char *dest;
@@ -31,4 +26,3 @@ dest[i] = src[i];
 
 return (dest);
 }
-
