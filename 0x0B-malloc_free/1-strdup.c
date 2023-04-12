@@ -4,8 +4,8 @@
 
 /**
 * _strdup - returns a pointer to a newly allocated space in memory,
-*           which contains a copy of the string given as a parameter.
-* @str: string to copy
+*
+* @src: string to copy
 *
 * Return: pointer to new string, or NULL if allocation fails
 */
@@ -33,4 +33,3 @@ dest[i] = src[i];
 
 return (dest);
 }
-
