@@ -19,13 +19,12 @@ return (NULL);
 for (i = 0; i < ac; i++)
 {
 for (j = 0; av[i][j]; j++)
-{
 k++;
-}
+
 k++;
 }
 
-str = malloc(sizeof(char) * k);
+str = malloc(sizeof(char) * (k + 1));
 
 if (str == NULL)
 return (NULL);
@@ -39,6 +38,7 @@ for (j = 0; av[i][j]; j++)
 str[k] = av[i][j];
 k++;
 }
+
 str[k] = '\n';
 k++;
 }
