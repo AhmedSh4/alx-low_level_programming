@@ -2,97 +2,78 @@
 #include "main.h"
 
 /**
-* count_words - counts the number of words in a string
-* @s: the string to count words in
+* count_word - helper function to count the number of words in a string
+* @s: string to evaluate
 *
-* Return: the number of words in the string
+* Return: number of words
 */
-int count_words(char *s)
+int count_word(char *s)
 {
-int i, count = 0;
+int flag, c, w;
 
-for (i = 0; s[i]; i++)
+flag = 0;
+w = 0;
+
+for (c = 0; s[c] != '\0'; c++)
 {
-if (s[i] != ' ' && (s[i + 1] == ' ' || s[i + 1] == '\0'))
-count++;
+if (s[c] == ' ')
+flag = 0;
+else if (flag == 0)
+{
+flag = 1;
+w++;
+}
 }
 
-return count;
-}
-
-/**
-* get_word_length - gets the length of a word in a string
-* @s: the string to get the word length from
-* @start: the starting index of the word
-*
-* Return: the length of the word
-*/
-int get_word_length(char *s, int start)
-{
-int len = 0;
-
-while (s[start + len] && s[start + len] != ' ')
-len++;
-
-return len;
-}
-
-/**
-* free_matrix - frees memory allocated for a matrix
-* @matrix: the matrix to free
-* @rows: the number of rows in the matrix
-*/
-void free_matrix(char **matrix, int rows)
-{
-int i;
-
-for (i = 0; i < rows; i++)
-free(matrix[i]);
-
-free(matrix);
+return (w);
 }
 
 /**
 * strtow - splits a string into words
-* @str: the string to split
+* @str: string to split
 *
-* Return: a pointer to an array of strings (success), or NULL (failure)
+* Return: pointer to an array of strings (Success)
+* or NULL (Error)
 */
 char **strtow(char *str)
 {
-char **wow;
-int i, j, k = 0, words, word_len;
+char **wow, *tmp;
+int i, k = 0, len = 0, words, c = 0, start, end;
 
-if (!str || !*str)
-return NULL;
+while (*(str + len))
+len++;
+words = count_word(str);
 
-words = count_words(str);
+if (words == 0)
+return (NULL);
 
-wow = malloc(sizeof(char *) * (words + 1));
-if (!wow)
-return NULL;
+wow = (char **) malloc(sizeof(char *) * (words + 1));
+if (wow == NULL)
+return (NULL);
 
-for (i = 0; i < words; i++)
+for (i = 0; i <= len; i++)
 {
-while (*str == ' ')
-str++;
-
-word_len = get_word_length(str, 0);
-
-wow[i] = malloc(sizeof(char) * (word_len + 1));
-if (!wow[i])
+if (str[i] == ' ' || str[i] == '\0')
 {
-free_matrix(wow, i);
-return NULL;
+if (c)
+{
+end = i;
+
+tmp = (char *) malloc(sizeof(char) * (c + 1));
+
+if (tmp == NULL)
+return (NULL);
+while (start < end)
+*tmp++ = str[start++];
+*tmp = '\0';
+wow[k] = tmp - c;
+k++;
+c = 0;
 }
-
-for (j = 0; j < word_len; j++)
-wow[i][j] = *(str++);
-
-wow[i][j] = '\0';
 }
-
-wow[i] = NULL;
-
-return wow;
+else if (c++ == 0)
+start = i;
+}
+wow[k] = NULL;
+return (wow);
 }
