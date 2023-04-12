@@ -4,20 +4,20 @@
 
 /**
 * _strdup - returns a pointer to a newly allocated space in memory,
-*           which contains a copy of the string given as a parameter.
-* @src: string to copy
+* which contains a copy of the string given as a parameter.
+* @str: string to copy
 *
 * Return: pointer to new string, or NULL if allocation fails
 */
-char *_strdup(char *str)
+char *_strdup(char *src)
 {
 char *dup;
 int i, len = 0;
 
-if (str == NULL)
+if (src == NULL)
 return (NULL);
 
-while (str[len])
+while (src[len])
 len++;
 
 dup = malloc(sizeof(char) * (len + 1));
@@ -29,7 +29,7 @@ return (NULL);
 }
 
 for (i = 0; i <= len; i++)
-dup[i] = str[i];
+dup[i] = src[i];
 
 return (dup);
 }
