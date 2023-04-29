@@ -18,7 +18,7 @@ if (s[i] < '0' || s[i] > '9')
 return 0;
 i++;
 }
-return 1;
+return (1);
 }
 
 /**
@@ -32,7 +32,7 @@ int _strlen(const char *s)
 int i = 0;
 while (s[i] != '\0')
 i++;
-return i;
+return (i);
 }
 
 /**
