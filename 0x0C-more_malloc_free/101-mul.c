@@ -45,30 +45,24 @@ exit(98);
 }
 
 /**
-* main - multiplies two positive numbers
-* @argc: number of arguments
-* @argv: array of arguments
+* multiply - multiplies two positive numbers
+* @s1: first number
+* @s2: second number
 *
-* Return: 0 on success, 1 on failure
+* Return: a pointer to the result of the multiplication
 */
-int main(int argc, char **argv)
+char *multiply(char *s1, char *s2)
 {
-char *s1, *s2;
-int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
-
-if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-error();
-
-s1 = argv[1];
-s2 = argv[2];
+int len1, len2, len, i, carry, digit1, digit2;
+char *result;
 
 len1 = _strlen(s1);
 len2 = _strlen(s2);
 len = len1 + len2 + 1;
 
-result = malloc(sizeof(int) * len);
+result = malloc(sizeof(char) * len);
 if (!result)
-return (1);
+return NULL;
 
 for (i = 0; i <= len1 + len2; i++)
 result[i] = 0;
@@ -90,11 +84,35 @@ if (carry > 0)
 result[len1 + len2 + 1] += carry;
 }
 
-for (i = 0; i < len - 1; i++)
-{
-if (result[i])
-a = 1;
+return (result);
+}
 
+/**
+* main - multiplies two positive numbers
+* @argc: number of arguments
+* @argv: array of arguments
+*
+* Return: 0 on success, 1 on failure
+*/
+int main(int argc, char **argv)
+{
+char *s1, *s2, *result;
+int i, a = 0;
+
+if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
+error();
+
+s1 = argv[1];
+s2 = argv[2];
+
+result = multiply(s1, s2);
+if (!result)
+error();
+
+for (i = 0; result[i] != '\0'; i++)
+{
+if (result[i] != 0)
+a = 1;
 if (a)
 putchar(result[i] + '0');
 }
@@ -108,4 +126,3 @@ free(result);
 
 return (0);
 }
-
