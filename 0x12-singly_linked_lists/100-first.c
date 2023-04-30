@@ -3,9 +3,10 @@
 void print_before_main(void) __attribute__ ((constructor));
 
 /**
-* print_before_main - Function that prints a string before the main function is executed.
+*print_before_main - Function that prints a string
+*before the main function is executed.
 *
-* Return: Nothing.
+*Return: Nothing.
 */
 void print_before_main(void)
 {
