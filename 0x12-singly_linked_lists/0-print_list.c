@@ -6,14 +6,13 @@
 /**
 * print_list - Prints all elements of a list_t list.
 * @h: Pointer to the list_t list to print.
-*
 * Return: The number of nodes in the list_t list.
 */
 size_t print_list(const list_t *h)
 {
 int node_count = 0;
 
-while (h != NULL)
+while (h)
 {
 if (h->str == NULL)
 {
@@ -26,6 +25,5 @@ printf("[%d] %s\n", h->len, h->str);
 node_count++;
 h = h->next;
 }
-
 return (node_count);
 }
