@@ -16,9 +16,13 @@ size_t node_count = 0;
 while (h)
 {
 if (h->str == NULL)
+{
 printf("[0] (nil)\n");
+}
 else
+{
 printf("[%u] %s\n", h->len, h->str);
+}
 
 node_count++;
 h = h->next;
