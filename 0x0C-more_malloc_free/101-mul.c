@@ -1,128 +1,126 @@
 #include <stdlib.h>
 #include <stdio.h>
-
-#define ERROR_MESSAGE "Error"
+#include "main.h"
 
 /**
-* is_digit - checks if a string contains only digits
-* @s: string to be evaluated
+* print_result - moves a string one place to the left and prints the string
+* @str: string to move
+* @len: length of string
 *
-* Return: 1 if s contains only digits, 0 otherwise
+* Return: void
 */
-int is_digit(const char *s)
+void print_result(char *str, int len)
 {
-int i = 0;
-while (s[i] != '\0')
+int i, j;
+
+i = j = 0;
+while (i < len)
 {
-if (s[i] < '0' || s[i] > '9')
-return 0;
+if (str[i] != '0')
+j = 1;
+if (j || i == len - 1)
+_putchar(str[i]);
 i++;
 }
+
+_putchar('\n');
+free(str);
+}
+
+/**
+* multiply - multiplies a char with a string and places the answer into dest
+* @n: char to multiply
+* @num: string to multiply
+* @num_last_index: last non NULL index of num
+* @dest: destination of multiplication
+* @dest_last_index: highest index to start addition
+*
+* Return: pointer to dest, or NULL on failure
+*/
+char *multiply(char n, char *num, int num_last_index, char *dest, int dest_last_index)
+{
+int j, k, mul, mulrem, add, addrem;
+
+mulrem = addrem = 0;
+for (j = num_last_index, k = dest_last_index; j >= 0; j--, k--)
+{
+mul = (n - '0') * (num[j] - '0') + mulrem;
+mulrem = mul / 10;
+add = (dest[k] - '0') + (mul % 10) + addrem;
+addrem = add / 10;
+dest[k] = add % 10 + '0';
+}
+for (addrem += mulrem; k >= 0 && addrem; k--)
+{
+add = (dest[k] - '0') + addrem;
+addrem = add / 10;
+dest[k] = add % 10 + '0';
+}
+if (addrem)
+{
+return (NULL);
+}
+return (dest);
+}
+
+/**
+* check_for_digits - checks the arguments to ensure they are digits
+* @args: pointer to arguments
+*
+* Return: 0 if digits, 1 if not
+*/
+int check_for_digits(char **args)
+{
+int i, j;
+
+for (i = 1; i < 3; i++)
+{
+for (j = 0; args[i][j]; j++)
+{
+if (args[i][j] < '0' || args[i][j] > '9')
 return (1);
 }
-
-/**
-* _strlen - returns the length of a string
-* @s: string to evaluate
-*
-* Return: the length of the string
-*/
-int _strlen(const char *s)
-{
-int i = 0;
-while (s[i] != '\0')
-i++;
-return (i);
+}
+return (0);
 }
 
 /**
-* error - prints an error message and exits the program
+* init_string - initializes a string
+* @str: string to initialize
+* @len: length of string
+*
+* Return: void
 */
-void error(void)
+void init_string(char *str, int len)
 {
-printf("%s\n", ERROR_MESSAGE);
+int i;
+
+for (i = 0; i < len; i++)
+str[i] = '0';
+str[i] = '\0';
+}
+
+/**
+* main - multiply two numbers
+* @argc: number of arguments
+* @argv: argument vector
+*
+* Return: zero, or exit status of 98 if failure
+*/
+int main(int argc, char *argv[])
+{
+int len1, len2, len_result, ti, i;
+char *result;
+char *temp;
+char error[] = "Error\n";
+
+if (argc != 3 || check_for_digits(argv))
+{
+for (ti = 0; error[ti]; ti++)
+_putchar(error[ti]);
 exit(98);
 }
-
-/**
-* multiply - multiplies two positive numbers
-* @s1: first number
-* @s2: second number
-*
-* Return: a pointer to the result of the multiplication
-*/
-char *multiply(char *s1, char *s2)
-{
-int len1, len2, len, i, carry, digit1, digit2;
-char *result;
-
-len1 = _strlen(s1);
-len2 = _strlen(s2);
-len = len1 + len2 + 1;
-
-result = malloc(sizeof(char) * len);
-if (!result)
-return NULL;
-
-for (i = 0; i <= len1 + len2; i++)
-result[i] = 0;
-
-for (len1 = len1 - 1; len1 >= 0; len1--)
-{
-digit1 = s1[len1] - '0';
-carry = 0;
-
-for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
-{
-digit2 = s2[len2] - '0';
-carry += result[len1 + len2 + 1] + (digit1 * digit2);
-result[len1 + len2 + 1] = carry % 10;
-carry /= 10;
 }
-
-if (carry > 0)
-result[len1 + len2 + 1] += carry;
-}
-
-return (result);
-}
-
-/**
-* main - multiplies two positive numbers
-* @argc: number of arguments
-* @argv: array of arguments
-*
-* Return: 0 on success, 1 on failure
-*/
-int main(int argc, char **argv)
-{
-char *s1, *s2, *result;
-int i, a = 0;
-
-if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-error();
-
-s1 = argv[1];
-s2 = argv[2];
-
-result = multiply(s1, s2);
-if (!result)
-error();
-
-for (i = 0; result[i] != '\0'; i++)
-{
-if (result[i] != 0)
-a = 1;
-if (a)
-putchar(result[i] + '0');
-}
-
-if (!a)
-putchar('0');
-
-putchar('\n');
-
-free(result);
-
+_print(a, ln - 1);
 return (0);
 }
