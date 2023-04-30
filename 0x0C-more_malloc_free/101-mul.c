@@ -10,7 +10,6 @@
 void print_result(char *str, int len)
 {
 int i, j;
-
 i = j = 0;
 while (i < len)
 {
@@ -20,7 +19,6 @@ if (j || i == len - 1)
 _putchar(str[i]);
 i++;
 }
-
 _putchar('\n');
 free(str);
 }
@@ -38,7 +36,6 @@ free(str);
 char *multiply(char n, char *num, int num_last_index, char *dest, int dest_last_index)
 {
 int j, k, mul, mulrem, add, addrem;
-
 mulrem = addrem = 0;
 for (j = num_last_index, k = dest_last_index; j >= 0; j--, k--)
 {
@@ -70,7 +67,6 @@ return (dest);
 int check_for_digits(char **args)
 {
 int i, j;
-
 for (i = 1; i < 3; i++)
 {
 for (j = 0; args[i][j]; j++)
@@ -81,7 +77,6 @@ return (1);
 }
 return (0);
 }
-
 /**
 * init_string - initializes a string
 * @str: string to initialize
@@ -92,12 +87,10 @@ return (0);
 void init_string(char *str, int len)
 {
 int i;
-
 for (i = 0; i < len; i++)
 str[i] = '0';
 str[i] = '\0';
 }
-
 /**
 * main - multiply two numbers
 * @argc: number of arguments
@@ -111,7 +104,6 @@ int len1, len2, len_result, ti, i;
 char *result;
 char *temp;
 char error[] = "Error\n";
-
 if (argc != 3 || check_for_digits(argv))
 {
 for (ti = 0; error[ti]; ti++)
