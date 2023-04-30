@@ -63,38 +63,31 @@ int main(int argc, char *argv[])
 {
 char *num1, *num2;
 int len1, len2, len, i, carry, digit1, digit2, *result, has_result = 0;
-
 num1 = argv[1], num2 = argv[2];
-
 if (argc != 3 || !is_number(num1) || !is_number(num2))
 exit_with_error();
-
 len1 = string_length(num1);
 len2 = string_length(num2);
 len = len1 + len2 + 1;
 result = malloc(sizeof(int) * len);
 if (!result)
 return (1);
-
 for (i = 0; i <= len1 + len2; i++)
 result[i] = 0;
-
 for (len1 = len1 - 1; len1 >= 0; len1--)
 {
 digit1 = num1[len1] - '0';
 carry = 0;
-
 for (len2 = string_length(num2) - 1; len2 >= 0; len2--)
 {
 digit2 = num2[len2] - '0';
-carry += result[len1 + len2 + 1] + (digit1 * digit2);
+carry += result[len1 + len2 + 1] + (digit1*digit2);
 result[len1 + len2 + 1] = carry % 10;
 carry /= 10;
 }
 if (carry > 0)
 result[len1 + len2 + 1] += carry;
 }
-
 for (i = 0; i < len - 1; i++)
 {
 if (result[i])
@@ -102,12 +95,9 @@ has_result = 1;
 if (has_result)
 putchar(result[i] + '0');
 }
-
 if (!has_result)
 putchar('0');
-
 putchar('\n');
 free(result);
-
 return (0);
 }
